@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GT Academy — Teacher Studio</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="teacher-page" data-role="owner">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark">GT</div>
+      <div>
+        <div class="brand-name">GT Academy</div>
+        <div class="brand-sub">Teacher studio</div>
+      </div>
+    </div>
+    <nav class="topbar-nav">
+      <a href="index.html">Home</a>
+      <a href="student.html">Student portal</a>
+      <a href="teacher.html" class="button light">Content hub</a>
+    </nav>
+  </header>
+
+  <main class="teacher-shell">
+    <div id="user-welcome" class="user-welcome"></div>
+
+    <section class="owner-dashboard">
+      <div class="dashboard-card">
+        <span class="eyebrow">TOTAL CONTENT</span>
+        <strong id="owner-video-count">0</strong>
+        <small>Videos</small>
+      </div>
+      <div class="dashboard-card">
+        <span class="eyebrow">PDF RESOURCES</span>
+        <strong id="owner-pdf-count">0</strong>
+        <small>Downloaded notes</small>
+      </div>
+      <div class="dashboard-card">
+        <span class="eyebrow">MOCK TESTS</span>
+        <strong id="owner-test-count">0</strong>
+        <small>Practice sets</small>
+      </div>
+      <div class="dashboard-card">
+        <span class="eyebrow">STUDENTS</span>
+        <strong id="owner-student-count">0</strong>
+        <small>Active learners</small>
+      </div>
+    </section>
+
+    <section class="teacher-overview">
+      <div>
+        <span class="eyebrow">YOUR CHANNEL</span>
+        <h1>Turn your teaching into a GT Academy library.</h1>
+      </div>
+      <div class="profile-badge dark">
+        <span>Instructor</span>
+        <strong>GT Academy</strong>
+      </div>
+    </section>
+
+    <section class="content-forms">
+      <form id="video-form" class="content-card">
+        <h3>Add YouTube lecture</h3>
+        <label>Exam category</label>
+        <select id="video-category">
+          <option>JEE Main</option>
+          <option>JEE Advanced</option>
+          <option>NEET</option>
+          <option>SSC CGL</option>
+          <option>Banking</option>
+          <option>UPSC</option>
+          <option>Railway</option>
+          <option>Board Exams</option>
+        </select>
+        <label>Lecture title</label>
+        <input id="video-title" placeholder="e.g. Limits and continuity" required />
+        <label>YouTube link</label>
+        <input id="video-link" type="url" placeholder="https://youtube.com/watch?v=..." required />
+        <button class="button primary" type="submit">Save video lecture</button>
+      </form>
+
+      <form id="pdf-form" class="content-card">
+        <h3>Upload lecture PDF</h3>
+        <label>Exam category</label>
+        <select id="pdf-category">
+          <option>JEE Main</option>
+          <option>JEE Advanced</option>
+          <option>NEET</option>
+          <option>SSC CGL</option>
+          <option>Banking</option>
+          <option>UPSC</option>
+          <option>Railway</option>
+          <option>Board Exams</option>
+        </select>
+        <label>PDF title</label>
+        <input id="pdf-title" placeholder="e.g. Trigonometry quick notes" required />
+        <label>PDF file name</label>
+        <input id="pdf-name" placeholder="chapter-notes.pdf" required />
+        <button class="button secondary" type="submit">Add PDF</button>
+      </form>
+
+      <form id="test-form" class="content-card">
+        <h3>Publish mock test</h3>
+        <label>Exam category</label>
+        <select id="test-category">
+          <option>JEE Main</option>
+          <option>JEE Advanced</option>
+          <option>NEET</option>
+          <option>SSC CGL</option>
+          <option>Banking</option>
+          <option>UPSC</option>
+          <option>Railway</option>
+          <option>Board Exams</option>
+        </select>
+        <label>Subject / section</label>
+        <input id="test-subject" placeholder="e.g. Physics or Quant" required />
+        <label>Chapter</label>
+        <input id="test-chapter" placeholder="e.g. Electrostatics" required />
+        <label>Topic</label>
+        <input id="test-topic" placeholder="e.g. Electric Charges & Field" required />
+        <label>Test title</label>
+        <input id="test-title" placeholder="e.g. Physics daily quiz" required />
+        <label>Question</label>
+        <textarea id="test-question" rows="3" placeholder="Write one question" required></textarea>
+        <div class="inline-inputs">
+          <input id="test-option-a" placeholder="Option A" required />
+          <input id="test-option-b" placeholder="Option B" required />
+        </div>
+        <div class="inline-inputs">
+          <input id="test-option-c" placeholder="Option C" required />
+          <input id="test-option-d" placeholder="Option D" required />
+        </div>
+        <label>Correct option</label>
+        <select id="test-correct">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+        </select>
+        <button class="button primary" type="submit">Publish to library</button>
+      </form>
+    </section>
+
+    <section class="curriculum-editor-panel">
+      <div class="panel-header">
+        <div>
+          <span class="eyebrow">OWNER CONTROL</span>
+          <h3>Edit exam curriculum</h3>
+        </div>
+        <span class="count-pill">Student view updates after save</span>
+      </div>
+      <div class="curriculum-editor-toolbar">
+        <select id="curriculum-exam" aria-label="Select exam curriculum"></select>
+        <select id="curriculum-subject" aria-label="Select curriculum subject"></select>
+        <label class="price-control">Test price ₹<input id="curriculum-test-price" type="number" min="0" step="1" value="20" /></label>
+        <label class="price-control">UPI ID<input id="admin-upi-id" type="text" placeholder="academy@upi" /></label>
+        <label class="price-control">QR image URL<input id="admin-qr-url" type="url" placeholder="https://.../qr.png" /></label>
+        <button id="add-curriculum-chapter" class="button secondary" type="button">Add chapter</button>
+        <button id="save-curriculum" class="button primary" type="button">Save curriculum</button>
+      </div>
+      <p id="curriculum-editor-status" class="auth-status" aria-live="polite"></p>
+      <div id="curriculum-editor-list" class="curriculum-editor-list"></div>
+    </section>
+
+    <section class="library-panel">
+      <div class="panel-header">
+        <div>
+          <span class="eyebrow">LIBRARY</span>
+          <h3>Your GT Academy content</h3>
+        </div>
+        <span id="library-count" class="count-pill">0 items</span>
+      </div>
+      <div id="teacher-library" class="library-cards"></div>
+    </section>
+
+    <section class="owner-lists">
+      <div class="side-panel-card">
+        <div class="panel-header compact-header">
+          <div>
+            <span class="eyebrow">STUDENTS</span>
+            <h3>Enrolled learners</h3>
+          </div>
+        </div>
+        <div id="owner-students" class="mini-list"></div>
+      </div>
+
+      <div class="side-panel-card">
+        <div class="panel-header compact-header">
+          <div>
+            <span class="eyebrow">RECENT</span>
+            <h3>Latest activity</h3>
+          </div>
+        </div>
+        <div id="owner-activity" class="mini-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/academy.js"></script>
+</body>
+</html>
+

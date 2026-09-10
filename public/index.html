@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GT Academy | Personal Teaching Platform</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="landing-page">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark">GT</div>
+      <div>
+        <div class="brand-name">GT Academy</div>
+        <div class="brand-sub">Your personal teaching platform</div>
+      </div>
+    </div>
+    <nav id="session-nav" class="topbar-nav">
+      <div class="exam-menu public-nav-link">
+        <button class="exam-menu-trigger" type="button" aria-expanded="false">Exams <span>▾</span></button>
+        <div id="exam-dropdown" class="exam-dropdown" role="menu"></div>
+      </div>
+      <a class="public-nav-link" href="#features">Features</a>
+      <a class="public-auth-link" href="#auth-panel">Login</a>
+      <a class="public-auth-link button light" href="#signup-panel">Sign up</a>
+      <span class="session-user" hidden></span>
+      <a class="session-home" href="index.html" hidden>Home</a>
+      <a class="session-dashboard button light" href="student.html" hidden>My dashboard</a>
+      <button class="session-logout" type="button" hidden>Logout</button>
+    </nav>
+  </header>
+
+  <main class="home-shell">
+    <section class="hero-section">
+      <div class="hero-copy">
+        <span class="eyebrow">GT ACADEMY</span>
+        <h1>Learn smarter. Practice stronger. Crack your exam.</h1>
+        <p>
+          Apne platform par aap apni lectures, YouTube videos, PDF notes, aur mock tests ko ek hi place par
+          organise kar sakte ho. Students aapke channel se direct study kar sakte hain aur exam ke hisaab se
+          content select kar sakte hain.
+        </p>
+        <div class="hero-actions">
+          <a href="student.html" class="button primary">Open student portal</a>
+          <a href="teacher.html" class="button secondary">Manage lessons</a>
+        </div>
+        <div class="trust-row">
+          <span>✔ YouTube lessons</span>
+          <span>✔ PDF notes</span>
+          <span>✔ 10-minute mock tests</span>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="mini-card accent">
+          <span>Live focus</span>
+          <strong>Competition prep</strong>
+          <small>JEE · NEET · SSC · UPSC · Banking</small>
+        </div>
+        <div class="mini-card">
+          <span>Today</span>
+          <strong>4 new lessons</strong>
+          <small>2 PDFs added · 1 new test</small>
+        </div>
+        <div class="mini-card small-grid">
+          <div><b>25</b><span>questions</span></div>
+          <div><b>10</b><span>minutes</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="exams" class="exam-section">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">EXAM TYPES</span>
+          <h2>Choose the preparation lane</h2>
+        </div>
+      </div>
+
+      <div class="exam-grid">
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">SUM</span><span>JEE Main</span></div>
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">ATOM</span><span>JEE Advanced</span></div>
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">BIO</span><span>NEET</span></div>
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">GRID</span><span>SSC CGL</span></div>
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">INR</span><span>Banking</span></div>
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">CIVIL</span><span>UPSC</span></div>
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">TRACK</span><span>Railway</span></div>
+        <div class="exam-card" data-icon-toggle tabindex="0"><span class="icon-badge">STAR</span><span>Board Exams</span></div>
+      </div>
+      <section id="exam-information" class="exam-information" hidden>
+        <div class="exam-information-head">
+          <div>
+            <span class="eyebrow">EXAM PLAYBOOK</span>
+            <h3 id="exam-information-title">JEE Main</h3>
+          </div>
+          <span id="exam-information-level" class="exam-level">Focused preparation</span>
+        </div>
+        <p id="exam-information-summary" class="exam-information-summary"></p>
+        <div class="exam-detail-grid">
+          <div><span class="detail-label">SUBJECTS</span><div id="exam-subjects" class="detail-tags"></div></div>
+          <div><span class="detail-label">KEY TOPICS</span><div id="exam-topics" class="detail-tags"></div></div>
+          <div><span class="detail-label">SUB-TOPICS</span><div id="exam-subtopics" class="detail-tags"></div></div>
+        </div>
+        <div class="strategy-box"><span class="detail-label">PREPARATION STRATEGY</span><p id="exam-strategy"></p></div>
+        <div id="exam-curriculum" class="exam-curriculum" hidden></div>
+      </section>
+    </section>
+
+    <section id="features" class="feature-section">
+      <div class="feature-box" data-icon-toggle tabindex="0">
+        <span class="feature-icon">PLAY</span>
+        <h3>YouTube content</h3>
+        <p>Har chapter ke liye video link add karo aur students direct aapke channel par ja kar dekh sakein.</p>
+      </div>
+      <div class="feature-box" data-icon-toggle tabindex="0">
+        <span class="feature-icon">PDF</span>
+        <h3>PDF lectures</h3>
+        <p>Notes, formula sheets, revision PDFs, aur topic-wise PDFs upload karo.</p>
+      </div>
+      <div class="feature-box" data-icon-toggle tabindex="0">
+        <span class="feature-icon">TEST</span>
+        <h3>Mock tests</h3>
+        <p>10 minute me 25 questions solve karna, score track karna, and performance analysis.</p>
+      </div>
+    </section>
+
+    <section id="auth-panel" class="auth-panel" hidden>
+      <div class="auth-card">
+        <span class="eyebrow">ACCESS PORTAL</span>
+        <h3>Login to GT Academy</h3>
+        <form id="auth-form" class="auth-form">
+          <input id="user-name" type="text" placeholder="Enter username or email" required />
+          <input id="user-password" type="password" placeholder="Enter password" required />
+          <select id="user-role">
+            <option value="student">Student</option>
+            <option value="owner">Owner / Admin</option>
+          </select>
+          <button type="submit" class="button primary">Login</button>
+        </form>
+        <div class="auth-divider"><span>or login with mobile OTP</span></div>
+        <form id="mobile-login-form" class="auth-form compact-auth-form">
+          <input id="login-mobile" type="tel" inputmode="numeric" placeholder="10-digit mobile number" pattern="[0-9]{10}" required />
+          <button type="submit" class="button secondary">Send demo OTP</button>
+        </form>
+        <form id="mobile-verify-form" class="auth-form compact-auth-form" hidden>
+          <input id="login-otp" type="text" inputmode="numeric" placeholder="Enter 6-digit OTP" maxlength="6" required />
+          <button type="submit" class="button primary">Verify and login</button>
+        </form>
+        <p id="mobile-login-status" class="auth-status" aria-live="polite"></p>
+        <p class="auth-note">
+          Demo owner login: username <strong>admin</strong> · password <strong>gtacademy123</strong>
+        </p>
+      </div>
+    </section>
+
+    <section id="signup-panel" class="auth-panel signup-panel" hidden>
+      <div class="auth-card">
+        <span class="eyebrow">NEW STUDENT</span>
+        <h3>Create your student account</h3>
+        <form id="signup-form" class="auth-form">
+          <input id="signup-name" type="text" placeholder="Your full name" required />
+          <input id="signup-mobile" type="tel" inputmode="numeric" placeholder="10-digit mobile number" pattern="[0-9]{10}" required />
+          <input id="signup-username" type="text" placeholder="Choose a username" required />
+          <input id="signup-password" type="password" placeholder="Create a password" minlength="6" required />
+          <select id="signup-exam" required>
+            <option value="">Choose your exam preparation</option>
+            <option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>SSC CGL</option>
+            <option>Banking</option><option>UPSC</option><option>Railway</option><option>Board Exams</option>
+          </select>
+          <button type="submit" class="button primary">Create student account</button>
+        </form>
+        <form id="signup-verify-form" class="auth-form compact-auth-form" hidden>
+          <input id="signup-otp" type="text" inputmode="numeric" placeholder="Enter 6-digit OTP" maxlength="6" required />
+          <button type="submit" class="button primary">Verify mobile and finish signup</button>
+        </form>
+        <p id="signup-status" class="auth-status" aria-live="polite"></p>
+        <p class="auth-note">Student signup gives access to exam content, PDFs, videos, and mock tests.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/academy.js"></script>
+</body>
+</html>
+

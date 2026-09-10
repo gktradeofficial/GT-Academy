@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GT Academy — Student Portal</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="student-page" data-role="student">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark">GT</div>
+      <div>
+        <div class="brand-name">GT Academy</div>
+        <div class="brand-sub">Student portal</div>
+      </div>
+    </div>
+    <nav id="session-nav" class="topbar-nav">
+      <a class="protected-nav-link" href="index.html">Home</a>
+      <a class="protected-nav-link button light" href="student.html">My dashboard</a>
+      <span class="session-user" hidden></span>
+      <a class="session-home" href="index.html" hidden>Home</a>
+      <button class="session-logout" type="button" hidden>Logout</button>
+    </nav>
+  </header>
+
+  <main class="student-shell">
+    <div id="user-welcome" class="user-welcome"></div>
+
+    <section class="student-profile-summary">
+      <div class="profile-card">
+        <span class="eyebrow">PROFILE</span>
+        <h3 id="student-name">Student</h3>
+        <p>Current focus: <strong id="student-focus">JEE Main</strong></p>
+      </div>
+      <div class="profile-card accent">
+        <span class="eyebrow">STREAK</span>
+        <strong id="student-streak">12 days</strong>
+        <small>Daily learning streak</small>
+      </div>
+      <div class="profile-card">
+        <span class="eyebrow">TARGET</span>
+        <strong id="student-target">85%</strong>
+        <small>Goal score</small>
+      </div>
+      <div class="profile-card accent">
+        <span class="eyebrow">NEXT GOAL</span>
+        <strong>Complete</strong>
+        <small>3 more chapter tests</small>
+      </div>
+    </section>
+
+    <section class="study-command-center">
+      <div class="study-overview-card">
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">MY STUDY SPACE</span>
+            <h2 id="study-greeting">Your preparation, organized.</h2>
+          </div>
+          <span class="study-status">ON TRACK</span>
+        </div>
+        <div class="study-progress-track"><span id="study-progress-bar"></span></div>
+        <p id="study-progress-label">Complete a lesson to start building your progress.</p>
+      </div>
+      <div class="study-metrics">
+        <div class="study-metric"><strong id="completed-count">0</strong><span>Completed</span></div>
+        <div class="study-metric"><strong id="revision-minutes">0m</strong><span>Revision time</span></div>
+        <div class="study-metric"><strong id="remaining-count">0</strong><span>Remaining</span></div>
+      </div>
+    </section>
+
+    <section class="student-hero">
+      <div>
+        <span class="eyebrow">YOUR PREP TRACK</span>
+        <h1>Choose your exam and start learning.</h1>
+      </div>
+      <div class="profile-badge">
+        <span>Teacher</span>
+        <strong>GT Academy</strong>
+      </div>
+    </section>
+
+    <section class="pricing-strip">
+      <div>
+        <span class="eyebrow">GT ACADEMY ACCESS</span>
+        <h3>Study package <strong>₹4,000</strong></h3>
+        <p>3 demo mock tests free. After that, each additional test is ₹20.</p>
+      </div>
+      <div class="pricing-actions"><span id="student-access-status" class="pricing-badge">3 FREE DEMOS</span><button id="pay-package" class="button primary" type="button">Pay & unlock</button></div>
+    </section>
+
+    <section class="exam-select-panel">
+      <div class="section-header compact">
+        <div>
+          <span class="eyebrow">SELECT EXAM</span>
+          <h2>Competition preparation</h2>
+        </div>
+      </div>
+      <div id="exam-filters" class="exam-filters"></div>
+    </section>
+
+    <section class="learning-grid">
+      <div class="learning-panel wide">
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">CONTENT LIBRARY</span>
+            <h3 id="selected-exam-title">JEE Main</h3>
+          </div>
+          <button id="start-mock-test" class="button primary">Start 10-min test</button>
+        </div>
+        <div id="student-library" class="library-cards"></div>
+      </div>
+
+      <aside class="learning-panel">
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">QUICK STATS</span>
+            <h3>Progress</h3>
+          </div>
+        </div>
+        <div class="stat-list">
+          <div class="stat-item"><strong id="stat-videos">0</strong><span>Videos</span></div>
+          <div class="stat-item"><strong id="stat-pdfs">0</strong><span>PDF notes</span></div>
+          <div class="stat-item"><strong id="stat-tests">0</strong><span>Mock tests</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="student-workspace-grid">
+      <div class="workspace-panel">
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">COMPLETED WORK</span>
+            <h3>Revision queue</h3>
+          </div>
+        </div>
+        <div id="completed-lessons" class="workspace-list"></div>
+      </div>
+      <div class="workspace-panel">
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">STUDY MATERIAL</span>
+            <h3>Keep learning</h3>
+          </div>
+        </div>
+        <div id="study-materials" class="workspace-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="mock-test-modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">MOCK TEST</span>
+          <h3 id="mock-test-name">GT Academy Test</h3>
+        </div>
+        <button id="close-mock-test" class="icon-button" aria-label="Close">×</button>
+      </div>
+
+      <div class="test-meta">
+        <span id="timer-text">10:00</span>
+        <span id="question-count">Question 1/25</span>
+      </div>
+
+      <div id="mock-question-box" class="question-box"></div>
+      <div id="mock-options" class="option-list"></div>
+      <div class="modal-actions">
+        <button id="prev-question" class="button secondary">Previous</button>
+        <button id="next-question" class="button primary">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">RESULT</span>
+          <h3>Mock test summary</h3>
+        </div>
+        <button id="close-result-modal" class="icon-button" aria-label="Close">×</button>
+      </div>
+      <div id="result-summary" class="question-box"></div>
+      <div class="modal-actions">
+        <button id="retake-test" class="button secondary">Retake test</button>
+        <button id="close-result" class="button primary">Back to dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="payment-modal" class="payment-modal" hidden>
+    <div class="payment-card">
+      <button id="close-payment" class="topic-content-close" type="button" aria-label="Close payment">×</button>
+      <span class="eyebrow">SECURE PAYMENT</span>
+      <h2>Unlock GT Academy package</h2>
+      <p>Scan the admin QR code or pay using the UPI ID below. After payment, confirm to activate your access.</p>
+      <img id="payment-qr" class="payment-qr" alt="GT Academy payment QR code" />
+      <strong id="payment-upi" class="payment-upi">UPI ID not configured</strong>
+      <div class="payment-amount">Package amount <strong>₹4,000</strong></div>
+      <button id="confirm-payment" class="button primary" type="button">I have completed payment</button>
+      <p class="payment-note">Demo mode: automatic bank verification requires a Razorpay/UPI webhook on the server.</p>
+    </div>
+  </div>
+
+  <script src="js/academy.js"></script>
+</body>
+</html>
+
