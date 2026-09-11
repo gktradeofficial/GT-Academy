@@ -6,6 +6,40 @@ const CURRICULUM_KEY = "gt-academy-curriculum";
 const PAYMENT_KEY = "gt-academy-payment-settings";
 let pendingSignup = null;
 let pendingMobileLogin = null;
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+
+let deferredInstallPrompt = null;
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  const installButton = document.querySelector(".install-app-button");
+  if (installButton) installButton.hidden = false;
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  const installButton = document.querySelector(".install-app-button");
+  if (installButton) installButton.hidden = true;
+});
+
+function installApp() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  deferredInstallPrompt.userChoice.finally(() => {
+    deferredInstallPrompt = null;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".install-app-button").forEach((button) => {
+    button.addEventListener("click", installApp);
+  });
+});
 const EXAM_OPTIONS = [
   "JEE Main",
   "JEE Advanced",

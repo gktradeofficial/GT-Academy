@@ -77,6 +77,18 @@ Ye MVP hai — real students/live class ke liye use karne se pehle ye zaroor kar
 5. **Persistence** — abhi queue state sirf server memory mein hai; server
    restart hone pe queue khali ho jayegi. Production mein Redis use karein.
 
+## Install as an app on Android, iOS, and desktop
+
+The frontend is now a Progressive Web App (PWA). Deploy it over HTTPS, open the site once, and install it from the browser:
+
+- Android / Chrome: tap **Install app** when the browser offers it, or use the browser menu and **Install app**.
+- iPhone / iPad: open in Safari, tap **Share**, then **Add to Home Screen**.
+- Windows / macOS / Linux: use the install icon in the address bar or the browser menu.
+
+The installed app uses the same codebase and keeps the study shell available offline. Live queue, video calls, and chat still need an internet connection and a configured HTTPS deployment. A PWA does not require a separate Android or iOS codebase.
+
+Publishing to Google Play is a separate store submission step: Google Play requires a signed Android package, a Play Console account, store listing details, and policy declarations. This project is ready to be wrapped as a Trusted Web Activity when you choose to publish, but no web code rewrite is needed for that packaging step. Apple App Store publication similarly requires an Apple Developer account and review.
+
 ## Roadmap (agle phases)
 
 - **Phase 2 — Whiteboard:** tldraw ya Excalidraw jaisa shared canvas embed
@@ -86,8 +98,8 @@ Ye MVP hai — real students/live class ke liye use karne se pehle ye zaroor kar
   Multiple live video streams ke liye WebRTC mesh (2-4 students tak) ya
   managed SFU service (LiveKit, Agora, 100ms) use karna hoga — ye scale
   aur reliability dono behtar denge.
-- **Phase 4 — Mobile app:** React Native mein wahi backend reuse karke
-  Android/iOS app banayenge.
+- **Phase 4 — Native store packaging:** optional Android Trusted Web Activity or
+   iOS web wrapper using this same PWA and backend.
 - **Auth & class management:** login system, class-wise student list,
   session history/recordings.
 
