@@ -42,6 +42,18 @@ Server `http://localhost:3000` pe chalega.
 - Teacher: `http://localhost:3000/teacher.html`
 - Student: `http://localhost:3000/student.html`
 
+### Vercel deployment and real SMS OTP
+
+The OTP endpoint is `api/otp.js` and uses Twilio Verify. In the Vercel project settings, add these Production environment variables before redeploying:
+
+```text
+TWILIO_ACCOUNT_SID
+TWILIO_AUTH_TOKEN
+TWILIO_VERIFY_SERVICE_SID
+```
+
+Create a Twilio Verify service first, and make sure the destination number is allowed by the Twilio account. Without these variables the app deliberately shows a configuration error instead of displaying a fake demo OTP. After changing Vercel variables, redeploy and reinstall or refresh the PWA so it picks up the new app shell.
+
 Test karne ke liye do alag browser tabs (ya ek normal + ek incognito) khol
 kar dono roles try karein.
 

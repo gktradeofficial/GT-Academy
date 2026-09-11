@@ -19,6 +19,7 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const { Server } = require("socket.io");
+const otpHandler = require("../api/otp");
 
 const app = express();
 const server = http.createServer(app);
@@ -57,6 +58,7 @@ app.use(rateLimit({
   message: { error: "Too many requests. Try again later." }
 }));
 app.use(express.json({ limit: "32kb" }));
+app.post("/api/otp", otpHandler);
 
 const io = new Server(server, {
   cors: {

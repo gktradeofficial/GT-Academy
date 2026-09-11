@@ -589,8 +589,31 @@ function activateStudentPackage() {
   return true;
 }
 
-function createDemoOtp() {
-  return String(Math.floor(100000 + Math.random() * 900000));
+function toIndianPhoneNumber(mobile) {
+  const digits = String(mobile).replace(/\D/g, "");
+  return digits.length === 10 ? `+91${digits}` : mobile;
+}
+
+async function requestOtp(mobile, purpose) {
+  const response = await fetch("/api/otp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "request", phone: toIndianPhoneNumber(mobile), purpose })
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || "OTP service is not configured.");
+  return result;
+}
+
+async function verifyOtp(mobile, otp) {
+  const response = await fetch("/api/otp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "verify", phone: toIndianPhoneNumber(mobile), code: otp })
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || "Invalid OTP.");
+  return result;
 }
 
 function findStudentByMobile(mobile) {
@@ -1389,9 +1412,15 @@ if (mobileLoginForm) {
       return;
     }
 
-    pendingMobileLogin = { account, otp: createDemoOtp() };
-    mobileVerifyForm.hidden = false;
-    if (mobileLoginStatus) mobileLoginStatus.textContent = `Demo OTP: ${pendingMobileLogin.otp}. Real SMS will be connected with an SMS provider.`;
+    requestOtp(mobile, "login")
+      .then(() => {
+        pendingMobileLogin = { account, mobile };
+        mobileVerifyForm.hidden = false;
+        if (mobileLoginStatus) mobileLoginStatus.textContent = "OTP sent. Check your phone and enter it below.";
+      })
+      .catch((error) => {
+        if (mobileLoginStatus) mobileLoginStatus.textContent = error.message;
+      });
   });
 }
 
@@ -1399,12 +1428,18 @@ if (mobileVerifyForm) {
   mobileVerifyForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const enteredOtp = document.getElementById("login-otp").value.trim();
-    if (!pendingMobileLogin || enteredOtp !== pendingMobileLogin.otp) {
-      if (mobileLoginStatus) mobileLoginStatus.textContent = "Invalid OTP. Please request a new demo OTP.";
+    if (!pendingMobileLogin) {
+      if (mobileLoginStatus) mobileLoginStatus.textContent = "Request an OTP first.";
       return;
     }
-    loginAccount(pendingMobileLogin.account);
-    window.location.href = "student.html";
+    verifyOtp(pendingMobileLogin.mobile, enteredOtp)
+      .then(() => {
+        loginAccount(pendingMobileLogin.account);
+        window.location.href = "student.html";
+      })
+      .catch((error) => {
+        if (mobileLoginStatus) mobileLoginStatus.textContent = error.message;
+      });
   });
 }
 
@@ -1426,9 +1461,15 @@ if (signupForm) {
       return;
     }
 
-    pendingSignup = { name, mobile, username, password, exam, otp: createDemoOtp() };
-    signupVerifyForm.hidden = false;
-    if (signupStatus) signupStatus.textContent = `Demo OTP: ${pendingSignup.otp}. Verify your mobile to finish signup.`;
+    requestOtp(mobile, "signup")
+      .then(() => {
+        pendingSignup = { name, mobile, username, password, exam };
+        signupVerifyForm.hidden = false;
+        if (signupStatus) signupStatus.textContent = "OTP sent. Check your phone and enter it below.";
+      })
+      .catch((error) => {
+        if (signupStatus) signupStatus.textContent = error.message;
+      });
   });
 }
 
@@ -1436,21 +1477,27 @@ if (signupVerifyForm) {
   signupVerifyForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const enteredOtp = document.getElementById("signup-otp").value.trim();
-    if (!pendingSignup || enteredOtp !== pendingSignup.otp) {
-      if (signupStatus) signupStatus.textContent = "Invalid OTP. Please check the demo OTP and try again.";
+    if (!pendingSignup) {
+      if (signupStatus) signupStatus.textContent = "Request an OTP first.";
       return;
     }
 
-    if (!registerStudent(pendingSignup.name, pendingSignup.mobile, pendingSignup.username, pendingSignup.password, pendingSignup.exam)) {
-      if (signupStatus) signupStatus.textContent = "Username or mobile number is already registered.";
-      return;
-    }
+    verifyOtp(pendingSignup.mobile, enteredOtp).catch((error) => {
+      if (signupStatus) signupStatus.textContent = error.message;
+    }).then((verified) => {
+      if (!verified) return;
 
-    if (signupStatus) signupStatus.textContent = "Mobile verified. Account created. You can now log in.";
-    signupForm.reset();
-    signupVerifyForm.hidden = true;
-    pendingSignup = null;
-    if (window.openLoginPanel) window.openLoginPanel();
+      if (!registerStudent(pendingSignup.name, pendingSignup.mobile, pendingSignup.username, pendingSignup.password, pendingSignup.exam)) {
+        if (signupStatus) signupStatus.textContent = "Username or mobile number is already registered.";
+        return;
+      }
+
+      if (signupStatus) signupStatus.textContent = "Mobile verified. Account created. You can now log in.";
+      signupForm.reset();
+      signupVerifyForm.hidden = true;
+      pendingSignup = null;
+      if (window.openLoginPanel) window.openLoginPanel();
+    });
   });
 }
 
